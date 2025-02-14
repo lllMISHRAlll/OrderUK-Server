@@ -7,9 +7,10 @@ import cardRouter from "./routes/paymentCard.js";
 import productRouter from "./routes/product.js";
 import addressRouter from "./routes/address.js";
 import bodyParser from "body-parser";
+dotenv.config();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 const corsOption = {
   origin: [
@@ -20,7 +21,6 @@ const corsOption = {
   credentials: true,
 };
 
-dotenv.config();
 connectToDB();
 app.use(bodyParser.json());
 app.use(cors(corsOption));
@@ -31,13 +31,13 @@ app.use("/api/address", addressRouter);
 app.use("/api/card", cardRouter);
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.status(200).send({
+    message: "Backend serve is up and runnning!!!",
+  });
 });
 
-if (process.env.NODE_ENV === "development") {
-  app.listen(PORT, () => {
-    console.log(`Server is Running on ${PORT}`);
-  });
-}
+// app.listen(PORT, () => {
+//   console.log(`Server is Running on ${PORT}`);
+// });
 
 module.exports = app;

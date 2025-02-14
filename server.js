@@ -10,8 +10,13 @@ import bodyParser from "body-parser";
 
 const app = express();
 const PORT = 5000;
+
 const corsOption = {
-  origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173",
+    "https://order-uk-client-naol.vercel.app",
+    "https://order-uk-client.vercel.app/",
+  ],
   credentials: true,
 };
 
@@ -32,3 +37,5 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is Running on ${PORT}`);
 });
+
+module.exports = app;

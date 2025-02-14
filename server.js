@@ -40,4 +40,4 @@ app.get("/", (req, res) => {
 //   console.log(`Server is Running on ${PORT}`);
 // });
 
-module.exports = app;
+export default app;

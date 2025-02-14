@@ -34,8 +34,10 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is Running on ${PORT}`);
-});
+if (process.env.NODE_ENV === "development") {
+  app.listen(PORT, () => {
+    console.log(`Server is Running on ${PORT}`);
+  });
+}
 
 module.exports = app;

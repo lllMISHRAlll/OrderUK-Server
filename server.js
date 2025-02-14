@@ -16,7 +16,7 @@ const corsOption = {
   origin: [
     "http://localhost:5173",
     "https://order-uk-client-naol.vercel.app",
-    "https://order-uk-client.vercel.app/",
+    "https://order-uk-client.vercel.app",
   ],
   credentials: true,
 };

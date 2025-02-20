@@ -71,3 +71,21 @@ export const getUserInfo = async (req, res, next) => {
     next(createError(400, error.message || "Error finding the user"));
   }
 };
+
+export const updateUser = async (req, res, next) => {
+  try {
+    const userId = req?.user?.userId;
+    const user = await User.findByIdAndUpdate(userId, req.body, {
+      new: true,
+    });
+
+    if (!user) return next(createError(400, "user not found"));
+    res.status(200).json({
+      message: "User Updated Successfully",
+      user,
+    });
+  } catch (error) {
+    console.log("err", error);
+    next(createError(400, `Updating User Failed: ${error}`));
+  }
+};

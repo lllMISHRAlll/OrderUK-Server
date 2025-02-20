@@ -18,6 +18,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Must provide a password"],
   },
+  gender: {
+    type: String,
+    enum: ["male", "female", "other"],
+  },
+  country: {
+    type: String,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

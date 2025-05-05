@@ -7,6 +7,7 @@ import cardRouter from "./routes/paymentCard.js";
 import productRouter from "./routes/product.js";
 import addressRouter from "./routes/address.js";
 import bodyParser from "body-parser";
+
 dotenv.config();
 
 const app = express();
@@ -22,8 +23,25 @@ const corsOption = {
 };
 
 connectToDB();
-app.use(bodyParser.json());
+
 app.use(cors(corsOption));
+app.options("*", cors(corsOption));
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (corsOption.origin.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  next();
+});
+
+app.use(bodyParser.json());
 
 app.use("/api/user", authRouter);
 app.use("/api/productpage", productRouter);

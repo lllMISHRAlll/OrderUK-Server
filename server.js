@@ -12,18 +12,16 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const corsOption = {
-  origin: [
-    "http://localhost:5173",
-    "https://order-uk-client-naol.vercel.app",
-    "https://order-uk-client.vercel.app",
-  ],
+const corsOptions = {
+  origin: (origin, callback) => {
+    callback(null, true);
+  },
   credentials: true,
 };
 
 connectToDB();
 app.use(bodyParser.json());
-app.use(cors(corsOption));
+app.use(cors(corsOptions));
 
 app.use("/api/user", authRouter);
 app.use("/api/productpage", productRouter);

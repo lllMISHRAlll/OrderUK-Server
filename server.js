@@ -12,14 +12,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const corsOption = {
-  origin: "*",
-  credentials: true,
-};
-
 connectToDB();
 app.use(bodyParser.json());
-app.use(cors(corsOption));
+app.use(cors());
 
 app.use("/api/user", authRouter);
 app.use("/api/productpage", productRouter);
